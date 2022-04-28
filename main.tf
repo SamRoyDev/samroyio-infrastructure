@@ -47,3 +47,21 @@ resource "aws_s3_bucket_website_configuration" "website-bucket" {
       key = "error.html"
     }
 }
+
+resource "aws_s3_bucket_policy" "allow_get" {
+    bucket = aws_s3_bucket.website-bucket.id
+    policy = data.aws_iam_policy_document.allow_get.json
+}
+
+data "aws_iam_policy_document" "allow_get" {
+    statement {
+      actions = [
+        "s3:GetObject"
+      ]
+
+      resources = [
+        aws_s3_bucket.website-bucket.arn,
+        "${aws_s3_bucket.website-bucket.arn}/*"
+      ]
+    }
+}

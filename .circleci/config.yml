@@ -15,6 +15,7 @@ jobs:
           environment:
             TF_VAR_CLOUDFLARE_API_KEY: $CLOUDFLARE_API_KEY
             TF_VAR_CLOUDFLARE_EMAIL: $CLOUDFLARE_EMAIL
+            TF_VAR_CLOUDFLARE_ZONE_ID: $CLOUDFLARE_ZONE_ID
       - persist_to_workspace:
           root: .
           paths:

@@ -9,6 +9,7 @@ terraform {
   backend "s3" {
       bucket = "samroyio-website-backend"
       region = "us-east-1"
+      key = "/"
   }
 }
 

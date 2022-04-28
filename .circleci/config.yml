@@ -12,6 +12,9 @@ jobs:
           command: |
             terraform init -input=false
             terraform plan -out tfapply -var-file variables.tfvars
+          environment:
+            TF_VAR_CLOUDFLARE_API_KEY: $CLOUDFLARE_API_KEY
+            TF_VAR_CLOUDFLARE_EMAIL: $CLOUDFLARE_EMAIL
       - persist_to_workspace:
           root: .
           paths:

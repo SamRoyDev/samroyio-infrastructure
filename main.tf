@@ -5,6 +5,11 @@ terraform {
       version = "3.44.0"
     }
   }
+
+  backend "s3" {
+      bucket = var.website-bucket-backend
+      region = "us-east-1"
+  }
 }
 
 provider "aws" {

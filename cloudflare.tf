@@ -9,6 +9,7 @@ resource "cloudflare_record" "www" {
     type = "CNAME"
     value = aws_s3_bucket_website_configuration.website-bucket.website_endpoint
     ttl = 3600
+    proxied = true
 }
 
 resource "cloudflare_record" "root" {
@@ -17,4 +18,26 @@ resource "cloudflare_record" "root" {
     type = "CNAME"
     value = aws_s3_bucket_website_configuration.website-bucket.website_endpoint
     ttl = 3600
+    proxied = true
+}
+
+resource "cloudflare_page_rule" "http_https_root" {
+    zone_id = data.aws_ssm_parameter.CLOUDFLARE_ZONE_ID.value
+    target = "${var.website-bucket}/*"
+
+    actions {
+      forwarding_url {
+        url = "https://${var.website-bucket-subdomain}/$1"
+        status_code = 301
+      }
+    }
+}
+
+resource "cloudflare_page_rule" "http_https_subdomain" {
+    zone_id = data.aws_ssm_parameter.CLOUDFLARE_ZONE_ID.value
+    target = "${var.website-bucket-subdomain}/*"
+
+    actions {
+      always_use_https = true
+    }
 }

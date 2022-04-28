@@ -11,7 +11,7 @@ resource "cloudflare_record" "www" {
     ttl = 3600
 }
 
-resource "cloudflare_record" "@" {
+resource "cloudflare_record" "root" {
     name = "@"
     zone_id = data.aws_ssm_parameter.CLOUDFLARE_ZONE_ID.value
     type = "CNAME"

@@ -10,3 +10,11 @@ resource "cloudflare_record" "www" {
     value = aws_s3_bucket_website_configuration.website-bucket.website_endpoint
     ttl = 3600
 }
+
+resource "cloudflare_record" "@" {
+    name = "@"
+    zone_id = data.aws_ssm_parameter.CLOUDFLARE_ZONE_ID.value
+    type = "CNAME"
+    value = aws_s3_bucket_website_configuration.website-bucket.website_endpoint
+    ttl = 3600
+}

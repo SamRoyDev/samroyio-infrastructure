@@ -26,10 +26,7 @@ resource "cloudflare_page_rule" "http_https_root" {
     target = "${var.website-bucket}/*"
 
     actions {
-      forwarding_url {
-        url = "https://${var.website-bucket-subdomain}/$1"
-        status_code = 301
-      }
+      always_use_https = true
     }
 }
 
@@ -38,6 +35,10 @@ resource "cloudflare_page_rule" "http_https_subdomain" {
     target = "${var.website-bucket-subdomain}/*"
 
     actions {
-      always_use_https = true
+      forwarding_url {
+        url = "https://${var.website-bucket}/$1"
+        status_code = 301
+      }
     }
 }
+

@@ -21,19 +21,24 @@ provider "aws" {
   region = "us-east-1"
 }
 
-
 resource "aws_s3_bucket" "website-bucket" {
-    bucket = var.website-bucket
-    force_destroy = true
+    bucket          = var.website-bucket
+    force_destroy   = true
+    acl             = "public-read"
+
     versioning {
         enabled = true
     }
+}
 
-    server_side_encryption_configuration {
-        rule {
-            apply_server_side_encryption_by_default {
-                sse_algorithm = "AES256"
-            }
-        }
+resource "aws_s3_bucket_website_configuration" "website-bucket-config" {
+    bucket = aws_s3_bucket.website-bucket
+
+    index_document {
+      suffix = "index.html"
+    }
+
+    error_document {
+      key = "error.html"
     }
 }

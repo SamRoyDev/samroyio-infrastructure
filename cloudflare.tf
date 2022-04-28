@@ -1,6 +1,6 @@
 provider "cloudflare" {
-    email = var.CLOUDFLARE_EMAIL
-    api_key = var.CLOUDFLARE_API_KEY
+    email = var.TF_VAR_CLOUDFLARE_EMAIL
+    api_key = var.TF_VAR_CLOUDFLARE_API_KEY
 }
 
 resource "cloudflare_record" "www" {

@@ -8,14 +8,15 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export TF_VAR_CLOUDFLARE_API_KEY=$CLOUDFLARE_API_KEY >> $BASH_ENV'
+            echo 'export TF_VAR_CLOUDFLARE_EMAIL=$CLOUDFLARE_EMAIL >> $BASH_ENV'
+            echo 'export TF_VAR_CLOUDFLARE_ZONE_ID=$CLOUDFLARE_ZONE_ID >> $BASH_ENV'
           name: terraform init & plan
           command: |
             terraform init -input=false
             terraform plan -out tfapply -var-file variables.tfvars
-          environment:
-            TF_VAR_CLOUDFLARE_API_KEY: $CLOUDFLARE_API_KEY
-            TF_VAR_CLOUDFLARE_EMAIL: $CLOUDFLARE_EMAIL
-            TF_VAR_CLOUDFLARE_ZONE_ID: $CLOUDFLARE_ZONE_ID
       - persist_to_workspace:
           root: .
           paths:

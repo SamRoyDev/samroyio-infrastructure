@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-      bucket = var.website-bucket-backend
+      bucket = "samroyio-website-backend"
       region = "us-east-1"
   }
 }

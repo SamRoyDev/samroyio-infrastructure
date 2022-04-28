@@ -55,6 +55,11 @@ resource "aws_s3_bucket_policy" "allow_get" {
 
 data "aws_iam_policy_document" "allow_get" {
     statement {
+      principals {
+        type = "AWS"
+        identifiers = ["*"]
+      }
+
       actions = [
         "s3:GetObject"
       ]

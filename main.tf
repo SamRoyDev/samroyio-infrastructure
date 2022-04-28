@@ -24,20 +24,25 @@ provider "aws" {
 resource "aws_s3_bucket" "website-bucket" {
     bucket          = var.website-bucket
     force_destroy   = true
-    acl             = "public-read"
+}
 
-    versioning {
-        enabled = true
+resource "aws_s3_bucket_versioning" "website-bucket" {
+    bucket          = aws_s3_bucket.website-bucket.id
+    versioning_configuration {
+      status = "Enabled"
     }
 }
 
-resource "aws_s3_bucket_website_configuration" "website-bucket-config" {
-    bucket = aws_s3_bucket.website-bucket
+resource "aws_s3_bucket_acl" "website-bucket" {
+    bucket          = aws_s3_bucket.website-bucket.id
+    acl             = "public-read"    
+}
 
+resource "aws_s3_bucket_website_configuration" "website-bucket" {
+    bucket = aws_s3_bucket.website-bucket.id
     index_document {
       suffix = "index.html"
     }
-
     error_document {
       key = "error.html"
     }

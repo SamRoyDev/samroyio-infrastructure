@@ -7,6 +7,6 @@ resource "cloudflare_record" "www" {
     name = "www"
     zone_id = data.aws_ssm_parameter.CLOUDFLARE_ZONE_ID.value
     type = "CNAME"
-    value = aws_s3_bucket_website_configuration.website-bucket-config.website_endpoint
+    value = aws_s3_bucket_website_configuration.website-bucket.website_endpoint
     ttl = 3600
 }

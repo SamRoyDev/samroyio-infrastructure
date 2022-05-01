@@ -21,7 +21,7 @@ resource "aws_s3_bucket_website_configuration" "website-bucket" {
       suffix = "index.html"
     }
     error_document {
-      key = "page-date/404.html"
+      key = "page-data/404.html"
     }
 }
 

@@ -18,10 +18,10 @@ resource "aws_s3_bucket_acl" "website-bucket" {
 resource "aws_s3_bucket_website_configuration" "website-bucket" {
     bucket = aws_s3_bucket.website-bucket.id
     index_document {
-      suffix = "index.html"
+      suffix = "page-data/index"
     }
     error_document {
-      key = "error.html"
+      key = "page-date/404.html"
     }
 }
 

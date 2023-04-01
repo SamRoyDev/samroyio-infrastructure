@@ -1,7 +1,7 @@
 ## infrastructure terraform backend
 
 ## Deployment Status
-[![CircleCI](https://circleci.com/gh/samroy92/samroyio-infrastructure/tree/master.svg?style=svg)](https://circleci.com/gh/samroy92/samroyio-infrastructure/tree/master)
+[![CircleCI](https://circleci.com/gh/SamRoyDev/samroyio-infrastructure/tree/master.svg?style=svg)](https://circleci.com/gh/SamRoyDev/samroyio-infrastructure/tree/master)
 
 ## Github -> CircleCI -> AWS Parameter Store (secrets) -> Cloudflare -> S3
 
